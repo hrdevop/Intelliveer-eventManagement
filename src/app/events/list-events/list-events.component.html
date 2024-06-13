@@ -67,23 +67,13 @@
               <mat-icon>location_on</mat-icon><span> {{ event.location }}</span>
             </p>
             <p class="d-flex gap-2">
-              <mat-icon>event</mat-icon> <span> {{ event.date }}</span>
+              <mat-icon>event</mat-icon> <span> {{ event.date | date: 'dd-MM-YYYY' }}</span>
             </p>
             <p class="d-flex gap-2">
               <mat-icon>description</mat-icon> <span>{{ event.description }}</span>
             </p>
           </div>
         </mat-card-content>
-        <!-- <mat-card-actions align="end">
-          <div class="d-flex gap-3">
-            <button mat-stroked-button color="warn" (click)="deleteParty(event.id)" class="rounded-4">
-              <mat-icon>delete</mat-icon> delete
-            </button>
-            <button mat-flat-button color="accent" (click)="editParty(event)" class="rounded-4">
-              <mat-icon>edit</mat-icon> edit
-            </button>
-          </div>
-        </mat-card-actions> -->
       </mat-card>
     }
   </div>
