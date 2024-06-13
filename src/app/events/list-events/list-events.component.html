@@ -1,0 +1,106 @@
+@if (!isMobile) {
+  <div class="table-container">
+    <table mat-table [dataSource]="events" class="mat-elevation-z8">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let event">{{ event.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let event">{{ event.date | date: 'dd-MM-YYYY' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td mat-cell *matCellDef="let event">{{ event.location }}</td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let event">{{ event.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let event">
+          <button
+            type="button"
+            mat-icon-button
+            color="primary"
+            [matMenuTriggerFor]="menu"
+            [matMenuTriggerData]="{ event: event }"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="5">
+          <ng-container *ngIf="false; else noData"></ng-container>
+        </td>
+      </tr>
+    </table>
+  </div>
+} @else {
+  <div class="card-container">
+    @for (event of events.data | filter: searchTerm; track $index) {
+      <mat-card class="rounded-4 border border-1">
+        <mat-card-header class="mb-2">
+          <mat-card-title-group>
+            <mat-card-title>{{ event.title }}</mat-card-title>
+
+            <button
+              type="button"
+              mat-icon-button
+              color="primary"
+              [matMenuTriggerFor]="menu"
+              [matMenuTriggerData]="{ event: event }"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="d-grid">
+            <p class="d-flex gap-2">
+              <mat-icon>location_on</mat-icon><span> {{ event.location }}</span>
+            </p>
+            <p class="d-flex gap-2">
+              <mat-icon>event</mat-icon> <span> {{ event.date }}</span>
+            </p>
+            <p class="d-flex gap-2">
+              <mat-icon>description</mat-icon> <span>{{ event.description }}</span>
+            </p>
+          </div>
+        </mat-card-content>
+        <!-- <mat-card-actions align="end">
+          <div class="d-flex gap-3">
+            <button mat-stroked-button color="warn" (click)="deleteParty(event.id)" class="rounded-4">
+              <mat-icon>delete</mat-icon> delete
+            </button>
+            <button mat-flat-button color="accent" (click)="editParty(event)" class="rounded-4">
+              <mat-icon>edit</mat-icon> edit
+            </button>
+          </div>
+        </mat-card-actions> -->
+      </mat-card>
+    }
+  </div>
+}
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-event="event">
+    <button type="button" mat-menu-item (click)="editEvent(event)"><mat-icon>edit</mat-icon> Edit</button>
+    <button type="button" mat-menu-item color="warn" (click)="deleteEvent(event.id)">
+      <mat-icon>delete</mat-icon> Delete
+    </button>
+  </ng-template>
+</mat-menu>
+<ng-template #noData>
+  <div class="d-grid gap-3 justify-content-center p-5">
+    <div class="text-center">
+      <img src="/assets/icons/empty.png" width="75" alt="" class="opacity-50" />
+    </div>
+    <span class="text-muted fs-5"> No Event Found</span>
+  </div>
+</ng-template>

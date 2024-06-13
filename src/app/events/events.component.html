@@ -1,0 +1,62 @@
+<div
+  [ngClass]="{
+    'p-3': !isMobile,
+    'rounded-4': !isMobile,
+    'mat-elevation-z8': !isMobile,
+    'm-3': !isMobile,
+    'p-2': isMobile,
+    'rounded-2': isMobile,
+  }"
+  class="d-grid gap-3"
+>
+  <div class="d-flex justify-content-between align-items-center">
+    @if (!isMobile) {
+      <button
+        mat-flat-button
+        color="accent"
+        [ngClass]="{ 'rounded-4': !isMobile }"
+        type="button"
+        (click)="openAddDialog()"
+      >
+        <mat-icon>add</mat-icon>Event
+      </button>
+    } @else {
+      <button
+        mat-fab
+        color="primary"
+        class="position-absolute bottom-0 end-0 z-3 m-3"
+        type="button"
+        (click)="openAddDialog()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    }
+
+    <mat-form-field appearance="outline" color="accent" [ngClass]="{ col: isMobile, 'w-25': !isMobile }">
+      <mat-label>Search</mat-label>
+      <input #searchValue type="search" matInput (input)="applyFilter($event)" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <mat-tab-group preserveContent>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="me-2">list</mat-icon>
+        List
+      </ng-template>
+      <ng-template matTabContent>
+        <app-list-events [events]="events" [searchTerm]="searchValue.value"></app-list-events>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="me-2">event</mat-icon>
+        Calendar
+      </ng-template>
+      <ng-template matTabContent>
+        <app-calendar-view-events [events]="events.data"></app-calendar-view-events>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

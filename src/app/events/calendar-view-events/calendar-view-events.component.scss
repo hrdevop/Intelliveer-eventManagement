@@ -1,0 +1,70 @@
+::ng-deep {
+  .fc-toolbar {
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 0.4rem 0.4rem 0.4rem 1rem;
+    border-radius: 2rem;
+  }
+  .fc-toolbar-title {
+    color: #616161;
+  }
+  .fc-button-group {
+    gap: 0.8rem;
+  }
+  .fc-event {
+    background-color: #03a9f4;
+    border-color: #03a9f4;
+    color: #fff;
+    border-radius: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .fc-day-grid {
+    border: none;
+  }
+
+  .fc-day-header,
+  .fc-day-number {
+    color: #555;
+  }
+
+  .fc-day-today {
+    background-color: #e6f7ff;
+  }
+
+  .fc-day-selected {
+    background-color: #cceeff;
+  }
+
+  .fc-view {
+    border: none;
+  }
+  .fc-event-tooltip {
+    background-color: #333;
+    color: #fff;
+  }
+  .fc-popover {
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .fc-daygrid-dot-event {
+    &:hover {
+      background: rgba(#03a9f4, 0.1);
+      color: #03a9f4;
+    }
+  }
+  .fc-col-header-cell-cushion {
+    color: #03a9f4;
+    text-decoration: none;
+  }
+  .fc-daygrid-day-number {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .fc-daygrid-event-dot {
+    border-color: #ffc107;
+  }
+}
